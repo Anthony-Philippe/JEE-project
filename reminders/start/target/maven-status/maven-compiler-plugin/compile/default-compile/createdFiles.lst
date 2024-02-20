@@ -1,0 +1,4 @@
+com\javaee\exercises\reminders\business\todos\entity\ToDo_.class
+com\javaee\exercises\reminders\business\todos\entity\ToDo.class
+com\javaee\exercises\reminders\presentation\ToDoBackingBean.class
+com\javaee\exercises\reminders\business\todos\boundary\ToDoManager.class
