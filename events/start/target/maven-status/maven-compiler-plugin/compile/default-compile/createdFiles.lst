@@ -1,0 +1,5 @@
+com\javaee\exercises\events\PrintProducer.class
+com\javaee\exercises\events\BindIt.class
+com\javaee\exercises\events\PrintEvent.class
+com\javaee\exercises\events\PrintServlet.class
+com\javaee\exercises\events\PrintObserver.class

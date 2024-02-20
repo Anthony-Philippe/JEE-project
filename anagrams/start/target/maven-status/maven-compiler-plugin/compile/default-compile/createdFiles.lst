@@ -1,0 +1,5 @@
+com\javaee\exercises\anagrams\bean\WordGenerator.class
+com\javaee\exercises\anagrams\model\Word.class
+com\javaee\exercises\anagrams\bean\Player.class
+com\javaee\exercises\anagrams\qualifier\Anagram$Language.class
+com\javaee\exercises\anagrams\qualifier\Anagram.class
