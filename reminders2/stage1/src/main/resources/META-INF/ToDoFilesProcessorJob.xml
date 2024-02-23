@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job id="ToDoFilesProcessorJob" xmlns="https://jakarta.ee/xml/ns/jakartaee" version="2.0">
+    <properties>
+        <property name="upload_directory" value="/tmp/uploads"/>
+        <property name="archive_directory" value="/tmp/archive"/>
+        <property name="failed_directory" value="/tmp/failed"/>
+    </properties>
+    <listeners>
+        <listener ref="FileProcessorJobListener"/>
+    </listeners>
+    <step id="ProcessToDoFiles">
+        <properties>
+            <property name="forbiddenWordInCaption" value="Spring"/>
+        </properties>
+        <listeners>
+            <listener ref="LineParseExceptionListener"/>
+        </listeners>
+        <chunk item-count="5">
+            <reader ref="ToDoItemReader"/>
+            <processor ref="ToDoItemProcessor"/>
+            <writer ref="ToDoItemWriter"/>
+            <skippable-exception-classes>
+                <include class="com.javaee.exercises.reminders.business.todos.boundary.batch.ToDoLineParseException"/>
+            </skippable-exception-classes>
+        </chunk>
+    </step>
+</job>

@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:pt="jakarta.faces.passthrough"
+                template="./WEB-INF/template.xhtml">
+    <ui:define name="content">
+        <h1>Search ToDos</h1>
+        <hr/>
+
+        <h:panelGroup layout="block" styleClass="button-panel">
+            <h:link styleClass="btn btn-primary" outcome="/faces/list-todos.xhtml">
+                <span class="fa fa-list-alt" aria-hidden="true"></span> ToDo List
+            </h:link>
+        </h:panelGroup>
+
+        <h:form>
+            <div class="form-group">
+                <h:outputLabel for="text" value="Text"/>
+                <h:inputText id="text" styleClass="form-control" value="#{toDoSearchBackingBean.text}" pt:autofocus="true"/>
+                <div class="invalid-feedback d-block">
+                    <h:message for="text"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="contexts" value="Contexts"/>
+                <h:inputText id="contexts" styleClass="form-control" value="#{toDoSearchBackingBean.contexts}" converter="contextsConverter"/>
+                <div class="invalid-feedback d-block">
+                    <h:message for="contexts"/>
+                </div>
+            </div>
+            <h:commandLink action="#{toDoSearchBackingBean.search}"
+                           styleClass="btn btn-outline-primary">
+                <span class="fa fa-search" aria-hidden="true"></span> Search
+            </h:commandLink>
+        </h:form>
+        <hr/>
+
+        <h:form rendered="#{not empty toDoSearchBackingBean.results}">
+            <h:dataTable value="#{toDoSearchBackingBean.results}" styleClass="table" var="todo">
+                <h:column>
+                    <f:facet name="header">Caption</f:facet>
+                    #{todo.caption}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Description</f:facet>
+                    #{todo.description}
+                </h:column>
+            </h:dataTable>
+        </h:form>
+
+        <h:outputText rendered="#{empty toDoSearchBackingBean.results}" value="No results!"/>
+
+    </ui:define>
+</ui:composition>

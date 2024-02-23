@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                template="./WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        <h1>ToDo List</h1>
+        <hr/>
+
+        <h:panelGrid columns="2" cellpadding="10" class="button-panel">
+            <h:link styleClass="btn btn-primary" outcome="/faces/add-todo.xhtml">
+                <span class="fa fa-plus" aria-hidden="true"></span> New ToDo
+            </h:link>
+            <h:link styleClass="btn btn-primary" outcome="/faces/search-todos.xhtml">
+                <span class="fa fa-search" aria-hidden="true"></span> Search ToDos
+            </h:link>
+        </h:panelGrid>
+
+        <h:form id="toDoForm">
+
+            <h:dataTable id="toDoTable" value="#{toDoBackingBean.toDos}" styleClass="table" var="todo">
+                <h:column>
+                    <f:facet name="header">#</f:facet>
+                    #{todo.id}
+                </h:column>
+                <h:column label="Done">
+                    <f:facet name="header">Done</f:facet>
+                    <h:selectBooleanCheckbox value="#{todo.done}">
+                        <f:ajax event="change" listener="#{toDoBackingBean.changeStatus(todo)}" render="toDoForm" />
+                    </h:selectBooleanCheckbox>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Caption</f:facet>
+                    #{todo.caption}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Description</f:facet>
+                    #{todo.description}
+                </h:column>
+                <h:column orderable="false">
+                    <f:facet name="header">Contexts</f:facet>
+                    <ui:repeat value="#{todo.contexts}" var="context">
+                        <span class="badge badge-info badge-pill">#{context}</span>
+                    </ui:repeat>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Actions</f:facet>
+                    <h:commandLink action="#{toDoBackingBean.editToDo(todo)}"
+                                   styleClass="btn btn-sm btn-outline-secondary">
+                        <span class="fa fa-pencil" aria-hidden="true"></span> EDIT
+                    </h:commandLink>
+                    <h:outputText value=" "/>
+                    <h:commandLink action="#{toDoBackingBean.removeToDo(todo)}"
+                                   styleClass="btn btn-sm btn-outline-danger"
+                                   onclick="return confirm('Are you sure?')">
+                        <span class="fa fa-trash" aria-hidden="true"></span> DELETE
+                        <f:ajax render="toDoForm" />
+                    </h:commandLink>
+                </h:column>
+            </h:dataTable>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

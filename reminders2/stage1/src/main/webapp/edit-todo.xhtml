@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                template="./WEB-INF/template.xhtml">
+    <ui:define name="content">
+        <h1>Edit ToDo</h1>
+        <hr/>
+        <h:panelGroup layout="block" styleClass="button-panel">
+            <h:link styleClass="btn btn-primary" outcome="/faces/list-todos.xhtml">
+                <span class="fa fa-list-alt" aria-hidden="true"></span> ToDo List
+            </h:link>
+        </h:panelGroup>
+        <h:form>
+            <ui:include src="./WEB-INF/todo-form.xhtml" />
+            <h:commandLink action="#{toDoBackingBean.saveToDo}"
+                           styleClass="btn btn-outline-primary">
+                <span class="fa fa-save" aria-hidden="true"></span> Change
+            </h:commandLink>
+        </h:form>
+    </ui:define>
+</ui:composition>
