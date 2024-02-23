@@ -11,6 +11,5 @@
 - Reminders
 
 #### Part 3
-- 
-- 
-- 
+- Reminders2
+- JMS
